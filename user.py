@@ -11,6 +11,22 @@ route = APIRouter()
 
 # Add new user
 
+@route.post("/users")
+def add_user(request: schemas.user, db: Session = Depends(get_db)):
+    
+    new_user = models.user (title = request.title,
+                           author =  request.author,
+                           description = request.description,
+                           published_year = request.published_year,
+                           publisher = request.publisher
+                        )
+
+    db.add(new_user)
+    db.commit()
+    db.refresh(new_user)
+
+    return new_user
+
 # Retrieve a list of all users:
 
 # Retrieve details for a specific user:
