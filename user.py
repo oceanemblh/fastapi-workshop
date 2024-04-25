@@ -12,7 +12,7 @@ route = APIRouter()
 # Add new user
 
 @route.post("/users")
-def add_user(request: schemas.user, db: Session = Depends(get_db)):
+def add_user(request: schemas.User, db: Session = Depends(get_db)):
     
     new_user = models.user (title = request.title,
                            author =  request.author,
